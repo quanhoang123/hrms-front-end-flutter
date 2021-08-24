@@ -4,7 +4,7 @@ import 'package:flutter_web_dashboard/controllers/menu_controller.dart';
 import 'package:flutter_web_dashboard/controllers/navigation_controller.dart';
 import 'package:flutter_web_dashboard/layout.dart';
 import 'package:flutter_web_dashboard/pages/404/error.dart';
-import 'package:flutter_web_dashboard/pages/authentication/authentication.dart';
+import 'package:flutter_web_dashboard/pages/authentication/auth.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
         getPages: [
         GetPage(name: rootRoute, page: () {
           return SiteLayout();
-        }),
-        GetPage(name: authenticationPageRoute, page: () => AuthenticationPage()),
+        }),      
+        GetPage(name: authenticationPageRoute, page: () => AuthPage()),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Dashboard',
