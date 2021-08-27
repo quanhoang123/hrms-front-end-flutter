@@ -24,12 +24,8 @@ class AccountPage extends StatelessWidget {
                     ],
                   ),
                  ),
-                  Expanded(child: ListView(
-                    children: [
-                      AccountTable()
-                    ],
-                  )),
-
+                  Expanded(
+                      child: AccountTable()),
                   ],
                 ),
               );

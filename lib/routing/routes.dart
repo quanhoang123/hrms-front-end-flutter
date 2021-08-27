@@ -15,11 +15,11 @@ const postsPageRoute = "/posts";
 const candidatesPageDisplayName = "Candidates";
 const candidatesPageRoute = "/candidates";
 
-const rolesPageDisplayName = "Roles";
-const rolesPageRoute = "/roles";
+const rolesPageDisplayName = "Permission";
+const rolesPageRoute = "/permission";
 
 
-const authenticationPageDisplayName = "Log out";
+const authenticationPageDisplayName = "Active";
 const authenticationPageRoute = "/auth";
 
 class MenuItem {

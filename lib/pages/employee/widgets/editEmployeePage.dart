@@ -75,11 +75,7 @@ class _EditEmployeeState extends State<EditEmployee>{
   //End Edit role Form
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detail Grouping and Delegating'),
-      ),
-      body: Container(
+    return Container(
         child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
           SizedBox(height: 20.0),
           Text('Edit Employee', textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
@@ -87,6 +83,13 @@ class _EditEmployeeState extends State<EditEmployee>{
               length: 5, // length of tabs
               initialIndex: 0,
               child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
+                ListTile(
+                    leading: IconButton(
+                      icon: BackButton(),
+                      onPressed: () {
+                        Navigator.of(context).pop;
+                      },
+                    )),
                 Container(
                   child: TabBar(
                     labelColor: Colors.green,
@@ -249,8 +252,6 @@ class _EditEmployeeState extends State<EditEmployee>{
               ])
           ),
         ]),
-      ),
-
     );
   }
 }

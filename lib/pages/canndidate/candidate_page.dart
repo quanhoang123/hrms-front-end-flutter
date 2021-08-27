@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/constants/controllers.dart';
 import 'package:flutter_web_dashboard/helpers/reponsiveness.dart';
-import 'package:flutter_web_dashboard/pages/users/widgets/user_table.dart';
-
+import 'package:flutter_web_dashboard/pages/canndidate/widgets/candidate_table.dart';
 import 'package:flutter_web_dashboard/widgets/custom_text.dart';
 import 'package:get/get.dart';
 
-class UsersPage extends StatelessWidget {
-  const UsersPage({Key key}) : super(key: key);
+class CandidatePage extends StatelessWidget {
+  const CandidatePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +28,8 @@ class UsersPage extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: ListView(
-                children: [UserTable()],
-              )),
+            child: CandidateTable(),
+          ),
         ],
       ),
     );

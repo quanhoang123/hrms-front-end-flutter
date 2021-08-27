@@ -25,8 +25,8 @@ class MenuController extends GetxController {
     switch (itemName) {
       case overviewPageDisplayName:
         return _customIcon(Icons.trending_up, itemName);
-      case authenticationPageDisplayName:
-        return _customIcon(Icons.exit_to_app, itemName);
+      // case authenticationPageDisplayName:
+      //   return _customIcon(Icons.exit_to_app, itemName);
       case postsPageDisplayName:
         return _customIcon(Icons.post_add, itemName);
       case candidatesPageDisplayName:
@@ -39,7 +39,7 @@ class MenuController extends GetxController {
       case accountsPageDisplayName:
         return _customIcon(Icons.person, itemName);
       default:
-        return _customIcon(Icons.exit_to_app, itemName);
+       return _customIcon(Icons.exit_to_app, itemName);
     }
   }
 

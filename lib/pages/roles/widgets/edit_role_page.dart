@@ -16,10 +16,9 @@ class DetailRoles extends StatefulWidget{
 class _DetailRolesState extends State<DetailRoles>{
   final Role role;
   _DetailRolesState(this.role);
-  // final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   //switch button
   bool _lights=true;
-  //Get roles and permission to edit
   UserPermission _role;
 
   _getRoles() {
@@ -57,13 +56,15 @@ class _DetailRolesState extends State<DetailRoles>{
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-
-      appBar: AppBar(
-        title: Text('Detail Grouping and Delegating'),
-      ),
-      body: ListView(
+    return ListView(
         children: [
+          ListTile(
+              leading: IconButton(
+                icon: BackButton(),
+                onPressed: () {
+                  Navigator.of(context).pop;
+                },
+              )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -95,7 +96,6 @@ class _DetailRolesState extends State<DetailRoles>{
                 if( cname.text.isEmpty ||
                     cdisplayName.text.isEmpty ||
                     cdescription.text.isEmpty){
-
                 }else{
                   editData();
                   Navigator.of(context).push(
@@ -106,97 +106,18 @@ class _DetailRolesState extends State<DetailRoles>{
             ),
           ),
           // roles(),
-          for(Role response_role in _role.role.permissions)
-          SwitchListTile(
-            title: Text(response_role.name),
-            value: _lights,
-            onChanged: (bool  value) {
-              setState(() { _lights = value; });
-              },
-            secondary: const Icon(Icons.lightbulb_outline),
-          )
+          // for(Role response_role in _role.role.permissions)
+          // SwitchListTile(
+          //   title: Text(response_role.name),
+          //   value: _lights,
+          //   onChanged: (bool  value) {
+          //     setState(() { _lights = value; });
+          //     print(_lights);
+          //     },
+          //   secondary: const Icon(Icons.lightbulb_outline),
+          // )
         ],
-      ),
-    );
-  }
-  Table roles() {
-    return Table(
-      border: TableBorder(
-        bottom: BorderSide(color: Colors.red, width: 2),
-        horizontalInside: BorderSide(color: Colors.red, width: 2),
-      ),
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: [
-        TableRow(children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Text(
-              "ID",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Text(
-              "NAME",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Text(
-              "Display Name",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Text(
-              "Description",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ]),
-        for (Role response_role in _role.permission)
-          TableRow(children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Text(
-                "${response_role.id}",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Text(
-                "${response_role.name}",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Text(
-                "${response_role.displayName}",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Text(
-                "${response_role.description}",
-              ),
-            ),
-          ]),
-      ],
+
     );
   }
 }

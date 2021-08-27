@@ -324,36 +324,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/api/callapi.dart';
 import 'package:flutter_web_dashboard/models/Account.dart';
+import 'package:flutter_web_dashboard/models/Candidates.dart';
 
 
 import 'package:flutter_web_dashboard/pages/account/network/account_service.dart';
 import 'package:flutter_web_dashboard/pages/account/widgets/account_edit.dart';
+import 'package:flutter_web_dashboard/pages/canndidate/service/candidate_service.dart';
 
 
 import 'package:flutter_web_dashboard/routing/routes.dart';
 import 'package:get/get.dart';
 
-class AccountTable extends StatefulWidget {
+class CandidateTable extends StatefulWidget {
   @override
-  _AccountTableState createState() => _AccountTableState();
+  _CandidateTableState createState() => _CandidateTableState();
 }
 
-class _AccountTableState extends State<AccountTable> {
-  List<Account> _account = [];
+class _CandidateTableState extends State<CandidateTable> {
+  List<Candidate> _candidate = [];
 
   @override
   void initState() {
     super.initState();
-    _getRoles();
+    _getCandidate();
   }
 
-  _getRoles() {
-    AccountService.getAccounts().then((response) {
+  _getCandidate() {
+    CandidateService.getData().then((response) {
       if (mounted) {
         setState(() {
-          _account = response;
+          _candidate = response;
         });
-
       }
     });
   }
@@ -441,7 +442,7 @@ class _AccountTableState extends State<AccountTable> {
           child: ListView(
             children: [
               Text(
-                "Account Data",
+                "Candidate Data",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -522,34 +523,55 @@ class _AccountTableState extends State<AccountTable> {
             ),
           ),
         ]),
-        for (Account res_account in _account)
+        for (Candidate res in _candidate)
           TableRow(children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Text(
-                "${res_account.id}",
+                "${res.id}",
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Text(
-                "${res_account.name}",
+                "${res.email}",
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Text(
-                "${res_account.email}",
+                "${res.nameEmp}",
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Text(
-                "${res_account.active ? "Kich Hoat" : "Vo Hieu Hoa"}",
+                "${res.dienthoai}",
               ),
             ),
             Row(
               children: <Widget>[
+                Expanded(
+                  child: GestureDetector(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.blueGrey,
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      child: Icon(
+                        Icons.view_array,
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: ()
+                    // print(row.getCells()[0].value.toString());
+                    {
+
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 Expanded(
                   child: GestureDetector(
                     child: Container(
@@ -564,12 +586,7 @@ class _AccountTableState extends State<AccountTable> {
                     onTap: ()
                     // print(row.getCells()[0].value.toString());
                     {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditAccount(
-                                account: res_account,
-                              )));
+
                     },
                   ),
                 ),
@@ -596,8 +613,7 @@ class _AccountTableState extends State<AccountTable> {
                           MaterialButton(
                             child: Text("OK DELETE"),
                             onPressed: () {
-                              deleteData(res_account.id);
-                              Get.offAllNamed(rolesPageRoute);
+
                             },
                           ),
                           MaterialButton(

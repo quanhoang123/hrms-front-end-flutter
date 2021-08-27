@@ -208,16 +208,9 @@ class _EmployeeTableState extends State<EmployeeTable> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(15),
+
           child: ListView(
             children: [
-              Text(
-                "Employee Data",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 12,
-              ),
               roles(),
             ],
           ),
@@ -275,16 +268,7 @@ class _EmployeeTableState extends State<EmployeeTable> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-            child: Text(
-              "Start date",
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
             child: Text(
@@ -334,12 +318,6 @@ class _EmployeeTableState extends State<EmployeeTable> {
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
               child: Text(
                 "${response_employee.hoTen}",
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Text(
-                "${response_employee.ngayBatDauLam}",
               ),
             ),
             Padding(

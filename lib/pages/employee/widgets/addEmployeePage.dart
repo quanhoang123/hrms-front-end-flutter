@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_dashboard/api/callapi.dart';
-import 'package:flutter_web_dashboard/models/Account.dart';
-import 'package:flutter_web_dashboard/models/Employee.dart';
-import 'package:flutter_web_dashboard/models/Roles.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_web_dashboard/routing/routes.dart';
 import 'package:get/get.dart';
 
@@ -11,45 +10,64 @@ class AddEmployee extends StatefulWidget {
   _AddEmployeeState createState() => _AddEmployeeState();
 }
 
+
+
 class _AddEmployeeState extends State<AddEmployee> {
   _AddEmployeeState();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //Start infomation employee
-  TextEditingController cmaNv = TextEditingController();
+
   TextEditingController cfullname = TextEditingController();
-  TextEditingController cbirthday = TextEditingController();
   TextEditingController csoCmnd = TextEditingController();
-  TextEditingController caddressNow = TextEditingController();
+
   TextEditingController cadressConact = TextEditingController();
   TextEditingController cphone = TextEditingController();
   TextEditingController cemail = TextEditingController();
-  // TextEditingController cgender = TextEditingController();
-  TextEditingController cdayRange =
-      TextEditingController(); // ngày cấp chứng minh nhân dân
-  TextEditingController caddressRange =
-      TextEditingController(); //nơi cấp chứng minh nhân dân
-  TextEditingController cstartdate =
-      TextEditingController(); //ngày bắt đầu làm việc
-  TextEditingController cendDate = TextEditingController(); //ngay cuoi lam viec
   TextEditingController cstatus = TextEditingController();
+  //Start add Level employee
+  TextEditingController clevel = TextEditingController();
+  TextEditingController cgraduationYear = TextEditingController();
+
+  TextEditingController cjobTitle = TextEditingController();
+  TextEditingController cderpartment = TextEditingController();
+  TextEditingController cpars = TextEditingController();
+  //End
+
+  DateTime cbirthday = DateTime.now();
+  DateTime cstartdate=DateTime.now();
+  DateTime cenddate=DateTime.now();
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: cbirthday,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != cbirthday)
+      setState(() {
+        cbirthday = picked;
+      });
+  }
+
 
   bool cgender = false;
   void addData() async {
     var data = {
-      "ma_nv": cmaNv.text,
       "ho_ten": cfullname.text,
-      "ngay_sinh": cbirthday.text,
+      "ngay_sinh": cbirthday,
       "so_cmnd": csoCmnd.text,
       "gioi_tinh": cgender,
-      "dia_chi_thuong_tru": caddressNow.text,
       "dia_chi_lien_he": cadressConact.text,
       "dien_thoai": cphone.text,
       "email": cemail.text,
-      "ngay_cap_cmnd": cdayRange.text,
-      "noi_cap_cmnd": caddressRange.text,
-      "ngay_bat_dau_lam": cstartdate.text,
-      "ngay_lam_viec_cuoi": cendDate.text,
+      "trinh_do":clevel.text,
+      "nam_tot_nghiep": cgraduationYear.text,
+      "chuc_danh": cjobTitle.text,
+      "ngay_bat_dau_lam": cstartdate,
+      "ngay_lam_viec_cuoi": cenddate,
+      "phongban_id":1,
+      "bophan_id":1,
+      "hoso_id":"",
     };
     var res = await CallApi().postData(data, 'add-employee');
     print(res);
@@ -59,36 +77,36 @@ class _AddEmployeeState extends State<AddEmployee> {
   }
   //End add infomation employee
 
-  //Start add Level employee
-  TextEditingController clevel = TextEditingController();
-  TextEditingController cschool = TextEditingController();
-  TextEditingController cgraduationYear = TextEditingController();
-  TextEditingController clibellum = TextEditingController();
-  TextEditingController cjobTitulus = TextEditingController();
-  TextEditingController cderpartment = TextEditingController();
-  TextEditingController cpars = TextEditingController();
 
-  //End
+
+  @override
+  initState() {
+    super.initState();
+    cbirthday = DateTime.now();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Detail Grouping and Delegating'),
-      ),
-      body: Container(
+    return Container(
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
                 Widget>[
-          SizedBox(height: 20.0),
-          Text('Edit Employee',
-              textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
-          DefaultTabController(
+              SizedBox(height: 20.0),
+              Text('Add Employee',
+                  textAlign: TextAlign.center, style: TextStyle(fontSize: 22)),
+              DefaultTabController(
               length: 5, // length of tabs
               initialIndex: 0,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
+                    ListTile(
+                        leading: IconButton(
+                          icon: BackButton(),
+                          onPressed: () {
+                            Navigator.of(context).pop;
+                          },
+                        )),
                     Container(
                       child: TabBar(
                         labelColor: Colors.green,
@@ -103,7 +121,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                       ),
                     ),
                     Container(
-                        height: 700, //height of TabBarView
+                        height: 450, //height of TabBarView
                         decoration: BoxDecoration(
                             border: Border(
                                 top: BorderSide(
@@ -120,30 +138,13 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         child: Column(
                                           children: [
                                             TextFormField(
-                                              controller: cmaNv,
-                                              decoration: InputDecoration(
-                                                labelText: 'Code Employee',
-                                                icon: Icon(Icons.lock),
-                                                // focusedBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide( color: Colors.red),
-                                                //   borderRadius: BorderRadius.circular(15),
-                                                // ),
-                                              ),
-                                            ),
-                                            TextFormField(
                                               controller: cfullname,
                                               decoration: InputDecoration(
                                                 labelText: 'Full Name',
                                                 icon: Icon(Icons.people),
                                               ),
                                             ),
-                                            TextFormField(
-                                              controller: caddressNow,
-                                              decoration: InputDecoration(
-                                                labelText: 'Permanent Address',
-                                                icon: Icon(Icons.home),
-                                              ),
-                                            ),
+
                                             TextFormField(
                                               controller: cadressConact,
                                               decoration: InputDecoration(
@@ -171,18 +172,20 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         ),
                                       ),
                                       SizedBox(
-                                        width: 100,
+                                        width: 10,
                                       ),
                                       Expanded(
                                         child: Column(
-                                          children: [
-                                            TextFormField(
-                                              controller: cbirthday,
-                                              decoration: InputDecoration(
-                                                labelText: 'Birthday',
-                                                icon:
-                                                    Icon(Icons.calendar_today),
-                                              ),
+                                          children: <Widget>[
+                                            InputDatePickerFormField(
+                                              firstDate: DateTime(2015, 8),
+                                              lastDate: DateTime(2101),
+                                              initialDate: cbirthday,
+                                              onDateSubmitted: (date) {
+                                                setState(() {
+                                                  cbirthday = date;
+                                                });
+                                              },
                                             ),
                                             TextFormField(
                                               controller: csoCmnd,
@@ -191,50 +194,28 @@ class _AddEmployeeState extends State<AddEmployee> {
                                                 icon: Icon(Icons.card_giftcard),
                                               ),
                                             ),
-                                            TextFormField(
-                                              controller: cdayRange,
-                                              decoration: InputDecoration(
-                                                labelText:
-                                                    'Date of issuance of identity card',
-                                                icon:
-                                                    Icon(Icons.calendar_today),
-                                              ),
+
+                                            InputDatePickerFormField(
+                                              firstDate: DateTime(2015, 8),
+                                              lastDate: DateTime(2101),
+                                              initialDate: cstartdate,
+                                              onDateSubmitted: (date) {
+                                                setState(() {
+                                                  cstartdate = date;
+                                                });
+                                              },
                                             ),
-                                            TextFormField(
-                                              controller: caddressRange,
-                                              decoration: InputDecoration(
-                                                labelText:
-                                                    'Place of issue of identity card',
-                                                icon: Icon(Icons.home),
-                                              ),
+                                            InputDatePickerFormField(
+                                              firstDate: DateTime(2015, 8),
+                                              lastDate: DateTime(2101),
+                                              initialDate: cenddate,
+                                              onDateSubmitted: (date) {
+                                                setState(() {
+                                                  cenddate = date;
+                                                });
+                                              },
                                             ),
-                                            TextFormField(
-                                              controller: cstartdate,
-                                              decoration: InputDecoration(
-                                                labelText: 'Start working',
-                                                icon:
-                                                    Icon(Icons.calendar_today),
-                                              ),
-                                            ),
-                                            TextFormField(
-                                              controller: cendDate,
-                                              decoration: InputDecoration(
-                                                labelText: 'End working date',
-                                                icon:
-                                                    Icon(Icons.calendar_today),
-                                              ),
-                                            ),
-                                            SwitchListTile(
-                                                title: Text(cgender
-                                                    ? "Male"
-                                                    : "Female"),
-                                                secondary: Icon(Icons.people),
-                                                value: cgender,
-                                                onChanged: (bool value) {
-                                                  setState(() {
-                                                    cgender = value;
-                                                  });
-                                                }),
+
                                           ],
                                         ),
                                       ),
@@ -255,19 +236,9 @@ class _AddEmployeeState extends State<AddEmployee> {
                                               decoration: InputDecoration(
                                                 labelText: 'Level',
                                                 icon: Icon(Icons.lock),
-                                                // focusedBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide( color: Colors.red),
-                                                //   borderRadius: BorderRadius.circular(15),
-                                                // ),
                                               ),
                                             ),
-                                            TextFormField(
-                                              controller: cschool,
-                                              decoration: InputDecoration(
-                                                labelText: 'Grauation School',
-                                                icon: Icon(Icons.people),
-                                              ),
-                                            ),
+
                                             TextFormField(
                                               controller: cgraduationYear,
                                               decoration: InputDecoration(
@@ -275,15 +246,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                                 icon: Icon(Icons.home),
                                               ),
                                             ),
-                                            TextFormField(
-                                              controller: clibellum,
-                                              decoration: InputDecoration(
-                                                labelText: 'Clibellum',
-                                                icon: Icon(
-                                                  Icons.home,
-                                                ),
-                                              ),
-                                            ),
+
                                           ],
                                         ),
                                       ),
@@ -294,7 +257,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                         child: Column(
                                           children: [
                                             TextFormField(
-                                              controller: cjobTitulus,
+                                              controller: cjobTitle,
                                               decoration: InputDecoration(
                                                 labelText: 'Job Titulus',
                                                 icon:
@@ -311,8 +274,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                                             TextFormField(
                                               controller: cpars,
                                               decoration: InputDecoration(
-                                                labelText:
-                                                    'Part Derpartment',
+                                                labelText: 'Part Derpartment',
                                                 icon:
                                                     Icon(Icons.calendar_today),
                                               ),
@@ -353,10 +315,10 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ))
                   ])),
           Container(
-            child: ElevatedButton(child: Text("Submit"), onPressed: () {}),
+            child: ElevatedButton(child: Text("Submit"), onPressed: () {addData()}),
           )
         ]),
-      ),
+
     );
   }
 }

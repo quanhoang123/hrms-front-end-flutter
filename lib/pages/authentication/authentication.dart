@@ -81,14 +81,6 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  CustomText(
-                    text: "Welcome back to the admin panel.",
-                    color: lightGrey,
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 15,
               ),
@@ -96,7 +88,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 controller: emailController,
                 decoration: InputDecoration(
                     labelText: "Email",
-                    hintText: "abc@domain.com",
+                    hintText: "superadmin@app.com",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),
               ),
@@ -107,7 +99,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: "password",
                     hintText: "123",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20))),

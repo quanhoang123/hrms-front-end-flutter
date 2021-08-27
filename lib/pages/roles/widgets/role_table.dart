@@ -3,6 +3,7 @@ import 'package:flutter_web_dashboard/api/callapi.dart';
 
 import 'package:flutter_web_dashboard/models/Roles.dart';
 import 'package:flutter_web_dashboard/pages/roles/Service/api_role.dart';
+import 'package:flutter_web_dashboard/pages/roles/widgets/demo.dart';
 import 'package:flutter_web_dashboard/pages/roles/widgets/edit_role_page.dart';
 import 'package:flutter_web_dashboard/routing/routes.dart';
 import 'package:get/get.dart';
@@ -60,10 +61,13 @@ class _RolesTableState extends State<RolesTable> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))
+            ),
             scrollable: true,
             title: Text('Add Role User'),
-            content: Padding(
-              padding: const EdgeInsets.all(8.0),
+            content: Container(
+              width: 500,
               child: Form(
                 child: Column(
                   children: <Widget>[
@@ -114,7 +118,7 @@ class _RolesTableState extends State<RolesTable> {
           child: ListView(
             children: [
               Text(
-                "Grouping and Delegating Data",
+                "Grouping and Delegating Data Table",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -237,12 +241,10 @@ class _RolesTableState extends State<RolesTable> {
                     onTap: ()
                     // print(row.getCells()[0].value.toString());
                     {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailRoles(
-                                role: response_role,
-                              )));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => MyHomePage()));
                     },
                   ),
                 ),

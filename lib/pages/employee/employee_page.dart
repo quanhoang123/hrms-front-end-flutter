@@ -29,10 +29,8 @@ class EmployeePage extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: ListView(
-                children: [EmployeeTable()],
-              )),
-        ],
+              child:EmployeeTable(),
+          )] ,
       ),
     );
   }

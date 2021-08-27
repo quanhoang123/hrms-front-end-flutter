@@ -51,7 +51,7 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
           Visibility(
               visible: !ResponsiveWidget.isSmallScreen(context),
               child: CustomText(
-                text: "Hr Management",
+                text: "HRM",
                 color: lightGrey,
                 size: 20,
                 weight: FontWeight.bold,
@@ -67,23 +67,10 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
             children: [
               IconButton(
                   icon: Icon(
-                    Icons.notifications,
+                    Icons.exit_to_app,
                     color: dark.withOpacity(.7),
                   ),
                   onPressed: () {logout();}),
-              Positioned(
-                top: 7,
-                right: 7,
-                child: Container(
-                  width: 12,
-                  height: 12,
-                  padding: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                      color: active,
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: light, width: 2)),
-                ),
-              )
             ],
           ),
           Container(
@@ -100,7 +87,7 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
               child: Text(userData != null ? '${userData['name']}' : '',
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 10.0,
+                      fontSize: 12.0,
                       fontWeight: FontWeight.w500
                   )
               )
@@ -108,10 +95,24 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
           SizedBox(
             width: 16,
           ),
+          // Positioned(
+          //   bottom: 9,
+          //   left: 4,
+          //   child: Container(
+          //     width: 12,
+          //     height: 12,
+          //     padding: EdgeInsets.all(4),
+          //     decoration: BoxDecoration(
+          //         color: active,
+          //         borderRadius: BorderRadius.circular(30),
+          //         border: Border.all(color: light, width: 2)),
+          //   ),
+          // ),
           Container(
             decoration: BoxDecoration(
                 color: active.withOpacity(.5),
                 borderRadius: BorderRadius.circular(30)),
+
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(30)),
@@ -126,7 +127,8 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
                 ),
               ),
             ),
-          )
+          ),
+
         ],
       ),
     );

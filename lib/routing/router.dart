@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_dashboard/pages/account/accounts.dart';
 
 
 import 'package:flutter_web_dashboard/pages/account/widgets/account_table.dart';
+import 'package:flutter_web_dashboard/pages/canndidate/candidate_page.dart';
+import 'package:flutter_web_dashboard/pages/employee/employee_page.dart';
 
 import 'package:flutter_web_dashboard/pages/employee/widgets/employeeTablePage.dart';
+import 'package:flutter_web_dashboard/pages/roles/roles_page.dart';
 import 'package:flutter_web_dashboard/pages/roles/widgets/role_table.dart';
 import 'package:flutter_web_dashboard/pages/overview/overview.dart';
 
@@ -14,17 +18,15 @@ Route<dynamic> generateRoute(RouteSettings settings){
     case overviewPageRoute:
       return _getPageRoute(OverviewPage());
     case accountsPageRoute:
-      return _getPageRoute(AccountTable());
+      return _getPageRoute(AccountPage());
     case employeesPageRoute:
-      return _getPageRoute(EmployeeTable());
+      return _getPageRoute(EmployeePage());
     case postsPageRoute:
-      return _getPageRoute(RolesTable());
+      return _getPageRoute(RolesPage());
     case candidatesPageRoute:
-      return _getPageRoute(AccountTable());
+      return _getPageRoute(CandidatePage());
     case rolesPageRoute:
-      return _getPageRoute(RolesTable());
-
-
+      return _getPageRoute(RolesPage());
     default:
       return _getPageRoute(OverviewPage());
 

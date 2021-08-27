@@ -28,9 +28,8 @@ class RolesPage extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: ListView(
-                children: [RolesTable()],
-              )),
+              child: RolesTable(),
+          ),
         ],
       ),
     );
