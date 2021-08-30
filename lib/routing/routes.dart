@@ -9,8 +9,6 @@ const accountsPageRoute = "/users";
 const employeesPageDisplayName = "Employee";
 const employeesPageRoute = "/employee";
 
-const postsPageDisplayName = "Posts";
-const postsPageRoute = "/posts";
 
 const candidatesPageDisplayName = "Candidates";
 const candidatesPageRoute = "/candidates";
@@ -36,7 +34,6 @@ List<MenuItem> sideMenuItemRoutes = [
   MenuItem(accountsPageDisplayName, accountsPageRoute),
   MenuItem(employeesPageDisplayName, employeesPageRoute),
 
-  MenuItem(postsPageDisplayName, postsPageRoute),
   MenuItem(candidatesPageDisplayName, candidatesPageRoute),
   MenuItem(rolesPageDisplayName, rolesPageRoute),
   MenuItem(authenticationPageDisplayName, authenticationPageRoute),

@@ -8,7 +8,6 @@ class CustomText extends StatelessWidget {
 
   const CustomText({Key key, this.text, this.size, this.color, this.weight}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Text(

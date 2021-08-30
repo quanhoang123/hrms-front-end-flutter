@@ -29,7 +29,7 @@ class SideMenu extends StatelessWidget {
                         SizedBox(width: _width / 48),
                         Padding(
                           padding: const EdgeInsets.only(right: 12),
-                          child: Image.asset("assets/icons/icoins.png", width: 28,),
+                          child: Image.asset("assets/icons/flutter.jpg", width: 28,),
                         ),
                         Flexible(
                           child: CustomText(

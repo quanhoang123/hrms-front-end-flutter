@@ -8,7 +8,6 @@ class AccountService {
   static Future<List<Account>> getAccounts() async {
     final response = await CallApi().getData('account');
     List<Account> list = parseResponse(response.body);
-    print(response.body);
     return list;
   }
   static List<Account> parseResponse(String responseBody) {
@@ -18,11 +17,9 @@ class AccountService {
 
   static Future<AccountRole> getRoleEdit(id) async{
     final response = await CallApi().getData('edit-account/$id');
-    // print(response.body);
     if(response.statusCode == 200){
       final parsed = json.decode(response.body);
       final data= AccountRole.fromJson(parsed);
-      // print(parsed);
       return data;
     }
   }

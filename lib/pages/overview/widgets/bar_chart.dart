@@ -33,10 +33,10 @@ class SimpleBarChart extends StatelessWidget {
       new OrdinalSales('Today', 55),
       new OrdinalSales('Yesterday', 25),
       new OrdinalSales('2 days', 100),
-      new OrdinalSales('24 Jun', 75),
-      new OrdinalSales('23 Jun', 15),
-      new OrdinalSales('22 Jun', 85),
-      new OrdinalSales('21 Jun', 45),
+      new OrdinalSales('24 Aug', 75),
+      new OrdinalSales('23 Sep', 15),
+      new OrdinalSales('22 Oct', 85),
+      new OrdinalSales('21 Nov', 45),
 
     ];
 

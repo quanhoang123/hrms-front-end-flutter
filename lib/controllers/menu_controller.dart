@@ -27,8 +27,6 @@ class MenuController extends GetxController {
         return _customIcon(Icons.trending_up, itemName);
       // case authenticationPageDisplayName:
       //   return _customIcon(Icons.exit_to_app, itemName);
-      case postsPageDisplayName:
-        return _customIcon(Icons.post_add, itemName);
       case candidatesPageDisplayName:
         return _customIcon(Icons.people, itemName);
       case rolesPageDisplayName:

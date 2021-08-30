@@ -1,5 +1,6 @@
-class Department {
-  Department({
+
+class FileElement {
+  FileElement({
     this.id,
     this.ten,
     this.createdAt,
@@ -11,7 +12,7 @@ class Department {
   dynamic createdAt;
   dynamic updatedAt;
 
-  factory Department.fromJson(Map<String, dynamic> json) => Department(
+  factory FileElement.fromJson(Map<String, dynamic> json) => FileElement(
     id: json["id"],
     ten: json["ten"],
     createdAt: json["created_at"],

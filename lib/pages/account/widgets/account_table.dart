@@ -366,10 +366,12 @@ class _AccountTableState extends State<AccountTable> {
       "password": cpassword.text
     };
     var res = await CallApi().postData(data, 'add-account');
-    print(res);
-    if (res) {
-      Get.offAllNamed(rolesPageRoute);
+
+    if(res != null){
+      print('Thanh cong');
+      Get.offAllNamed(accountsPageRoute);
     }
+
   }
 
   void deleteData(id)async{

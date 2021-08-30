@@ -14,8 +14,8 @@ class OverviewCardsMediumScreen extends StatelessWidget {
         Row(
                   children: [
                     InfoCard(
-                      title: "Rides in progress",
-                      value: "7",
+                      title: "Employee Number",
+                      value: "2",
                       onTap: () {},
                   topColor: Colors.orange,
 
@@ -24,8 +24,8 @@ class OverviewCardsMediumScreen extends StatelessWidget {
                       width: _width / 64,
                     ),
                     InfoCard(
-                      title: "Packages delivered",
-                      value: "17",
+                      title: "Notification (Candidate)",
+                      value: "0",
                   topColor: Colors.lightGreen,
 
                       onTap: () {},

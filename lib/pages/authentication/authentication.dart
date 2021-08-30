@@ -63,7 +63,7 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 12),
-                    child: Image.asset("assets/icons/icoins.png",width:30),
+                    child: Image.asset("assets/icons/flutter.jpg",width:50),
                   ),
                   Expanded(child: Container()),
                 ],

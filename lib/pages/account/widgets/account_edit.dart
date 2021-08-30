@@ -1,18 +1,22 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:dio/dio.dart' as dio;
 
-import 'package:file_picker/file_picker.dart';
+
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'dart:html' as html;
 
 import 'package:flutter_web_dashboard/api/callapi.dart';
 import 'package:flutter_web_dashboard/models/Account.dart';
 import 'package:flutter_web_dashboard/pages/account/accounts.dart';
 import 'package:flutter_web_dashboard/pages/account/network/account_service.dart';
+import 'package:flutter_web_dashboard/routing/routes.dart';
+import 'package:get/get.dart';
 
-import 'package:image_picker/image_picker.dart';
+
+import 'package:path/path.dart' as path;
+import 'package:mime_type/mime_type.dart';
+import 'package:image_picker_web/image_picker_web.dart';
 
 class EditAccount extends StatefulWidget {
   Account account;
@@ -23,6 +27,7 @@ class EditAccount extends StatefulWidget {
 
 class _EditAccountState extends State<EditAccount> {
   final Account account;
+  var avatar;
   _EditAccountState(this.account);
 
   TextEditingController cname;
@@ -32,16 +37,18 @@ class _EditAccountState extends State<EditAccount> {
   bool cactive = false;
   String cavatar;
 
+
   void editData() async {
-    var data = {
-      'name': cname.text,
-      'email': cemail.text,
-      'password': cpassword.text,
-      'avatar': this.cavatar,
-      'active': this.cactive,
-    };
-    var res =
-        await CallApi().postData(data, 'edit-account/${widget.account.id}');
+    var data = new Map<String, dynamic>();
+    data['name']= cname.text;
+    data['email']= cemail.text;
+    data['password']= cpassword.text;
+    data['avatar']= this.avatar;
+    data['active']= this.cactive;
+    
+    await CallApi().postData(data, 'edit-account/${account.id}');
+    Get.offAllNamed(accountsPageRoute);
+
   }
 
   String _selectRoleId;
@@ -53,7 +60,6 @@ class _EditAccountState extends State<EditAccount> {
         setState(() {
           _role = response;
         });
-        print(_role.roles);
       }
     });
   }
@@ -70,38 +76,33 @@ class _EditAccountState extends State<EditAccount> {
   }
 
 
+  // Demo upload image
 
-  //Test upload image
+  Future<void> _onAddPhoto() async {
 
-  Future<FilePickerResult> selectFile(bool allowMultiple) async {
-    var files;
-    await FilePicker.platform
-        .pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ["pdf", "doc", "docx", "png", "jpg", "xls", "xlsx", "ppt", "pptx"], ///Dinh dang file minh muon
-      allowMultiple: allowMultiple,
-    ).then((selectedFiles) => files = selectedFiles);
-    return files;
-  }
+    var mediaData = await ImagePickerWeb.getImageInfo;
+    dynamic mimeType = mime(path.basename(mediaData.fileName));
+    dynamic mediaFile =
+    html.File(mediaData.data, mediaData.fileName, {'type': mimeType});
 
-  Future<void> addFile(FilePickerResult fileResult) async {
-    List<dynamic> files = [];
-    for (var file in fileResult.files) {
-      files.add(await dio.MultipartFile.fromFile(file.path));
+    print('imageFile ${mediaData.toString()}');
+
+    if (mediaData != null) {
+      setState(() {
+        avatar = mediaData.data;
+      });
     }
-
   }
-
     @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         ListTile(
             leading: IconButton(
-          icon: BackButton(),
-          onPressed: () {
-            Navigator.of(context).pop;
-          },
+            icon: BackButton(),
+            onPressed: () {
+              Navigator.of(context).pop;
+            },
         )),
         Center(
           child: Stack(
@@ -141,48 +142,33 @@ class _EditAccountState extends State<EditAccount> {
                       ),
                       color: Colors.green,
                     ),
-                    child: IconButton(
-                      icon: const Icon(Icons.edit),
-                      tooltip: 'Edit Profile',
-                      onPressed: () async  {
-                          final files = await selectFile(true);
-                      },
+                    child: GestureDetector(
+                      onTap: () => _onAddPhoto(),
+                      child: avatar == null
+                          ? Container(
+                        height: 100,
+                        margin: EdgeInsets.all(5),
+                        child: Center(
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
+                      )
+                          : Center(
+                        child: Container(
+                          width: 300,
+                          height: 500,
+                          child: Image.memory(avatar),
+                        ),
+                      ),
+                      //avatar.first
                     ),
                   )),
             ],
           ),
         ),
-        // showImage(),
-        // Center(
-        //   child: _image == null
-        //       ? new Stack(
-        //     children: <Widget>[
-        //       new Center(
-        //         child: new CircleAvatar(
-        //           radius: 80.0,
-        //           backgroundColor:
-        //           const Color(0xFF778899),
-        //         ),
-        //       ),
-        //       new Center(
-        //         child: Icon(
-        //           Icons.perm_identity,
-        //           size: 120,
-        //         ),
-        //       ),
-        //     ],
-        //   )
-        //       : new CircleAvatar(
-        //     radius: 60,
-        //     child: ClipOval(
-        //       child: Align(
-        //         heightFactor: 0.8,
-        //         widthFactor: 1.0,
-        //         child: new Image.file(_image),
-        //       ),
-        //     ),
-        //   ),
-        // ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
@@ -199,7 +185,6 @@ class _EditAccountState extends State<EditAccount> {
                 hintText: "Enter password", labelText: "Enter email"),
           ),
         ),
-
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
@@ -229,14 +214,12 @@ class _EditAccountState extends State<EditAccount> {
           padding: const EdgeInsets.all(8.0),
           child: DropdownButton(
             hint: Text("Select Permission"),
-            items: _role.roles
-                .map(
+            items: _role.roles != null ? _role.roles.map(
                   (item) => DropdownMenuItem(
                     child: Text(item.name),
                     value: item.id.toString(),
                   ),
-                )
-                .toList(),
+                ).toList() : CircularProgressIndicator(),
             onChanged: (newVal) {
               setState(() {
                 _selectRoleId = newVal;

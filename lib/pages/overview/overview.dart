@@ -46,8 +46,6 @@ class OverviewPage extends StatelessWidget {
                 RevenueSectionLarge()
               else
                 RevenueSectionSmall(),
-
-             
             ],
           ))
         ],

@@ -95,19 +95,6 @@ class _TopNavigationBarState extends State<TopNavigationBar> {
           SizedBox(
             width: 16,
           ),
-          // Positioned(
-          //   bottom: 9,
-          //   left: 4,
-          //   child: Container(
-          //     width: 12,
-          //     height: 12,
-          //     padding: EdgeInsets.all(4),
-          //     decoration: BoxDecoration(
-          //         color: active,
-          //         borderRadius: BorderRadius.circular(30),
-          //         border: Border.all(color: light, width: 2)),
-          //   ),
-          // ),
           Container(
             decoration: BoxDecoration(
                 color: active.withOpacity(.5),
@@ -143,7 +130,7 @@ AppBar topNavigationBar(BuildContext context, GlobalKey<ScaffoldState> key) =>
                 Padding(
                   padding: const EdgeInsets.only(left: 16),
                   child: Image.asset(
-                    "assets/icons/icoins.png",
+                    "assets/icons/flutter.jpg",
                     width: 28,
                   ),
                 ),

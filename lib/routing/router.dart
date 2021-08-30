@@ -21,8 +21,6 @@ Route<dynamic> generateRoute(RouteSettings settings){
       return _getPageRoute(AccountPage());
     case employeesPageRoute:
       return _getPageRoute(EmployeePage());
-    case postsPageRoute:
-      return _getPageRoute(RolesPage());
     case candidatesPageRoute:
       return _getPageRoute(CandidatePage());
     case rolesPageRoute:
